@@ -1,6 +1,8 @@
+@import "base";
+
 #content {
 	.todo-app {
-		margin: 0 auto;
+		margin: 50px auto;
 		width: 500px;
 		& > div {
 			h1 {
@@ -15,6 +17,20 @@
 			.todo-container {
 				.todo-item {
 					position: relative;
+					& > input {
+						position: absolute;
+						left: -20px;
+						top: 13px;
+					}
+					&.checked {
+						.todo-info {
+							background-color: $base-green;
+							opacity: 0.7;
+						}
+						.step-item {
+							text-decoration: line-through;
+						}
+					}
 					.todo-info {
 						border: 1px solid black;
 						h3 {
@@ -23,8 +39,8 @@
 					}
 					.todo-close {
 						position: absolute;
-						right: 0;
-						top: 0;
+						right: 9px;
+						top: 9px;
 						&:hover {
 							cursor: pointer;
 						}
@@ -35,6 +51,14 @@
 						}
 						.step-item {
 							border-bottom: 1px solid lightgray;
+							& > input {
+								margin-right: 5px;
+							}
+							&.checked {
+								text-decoration: line-through;
+								background-color: $base-green;
+								opacity: 0.7;
+							}
 						}
 					}
 				}

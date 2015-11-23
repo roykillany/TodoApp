@@ -28,8 +28,18 @@
 		if(idx > -1) {_todos.splice(idx, 1)};
 	};
 
+	TodoStore.updateTodo = function(todo) {
+		var oldTodo = this.find(todo.id),
+			oldIdx = _todos.indexOf(oldTodo);
+		_todos[oldIdx] = todo;
+	};
+
 	TodoStore.resetTodos = function(todos) {
 		_todos = todos;
+	};
+
+	TodoStore.find = function(id) {
+		return _todos.filter(function(todo) { return todo.id === id; })[0];
 	};
 
 	TodoStore.dispatcherID = AppDispatcher.register(function(payload) {
@@ -45,6 +55,12 @@
 			case TodoConstants.TODO_REMOVED:
 				TodoStore.removeTodo(payload.todo);
 				TodoStore.changed();
+				break;
+			case TodoConstants.TODO_UPDATED:
+				console.log("TODO_UPDATED", payload);
+				TodoStore.updateTodo(payload.todo);
+				TodoStore.changed();
+				break;
 		}
 	});
 

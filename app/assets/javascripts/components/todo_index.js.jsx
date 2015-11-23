@@ -23,10 +23,25 @@ TodoIndex = React.createClass({
 		ApiUtil.removeTodo(todo);
 	},
 
+	updateCompletion: function(e) {
+		var id = $(e.currentTarget).parent().data("id"),
+			todo = this.find(id);
+		todo.done = !todo.done
+		ApiUtil.updateTodo(todo);
+	},
+
+	find: function(id) {
+		return this.state.todos.filter(function(todo) { return todo.id === id; })[0];
+	},
+
 	render: function() {
+		// console.log(this.state.todos);
 		var self = this;
 		var todos = this.state.todos.map(function(td, idx) {
-			return <li key={td.id} className="todo-item">
+			var checked = td.done ? "checked" : "",
+				className = "todo-item " + checked;
+			return <li key={td.id} data-id={td.id} className={className}>
+				<input type="checkbox" checked={checked} name="done" onChange={self.updateCompletion} value="true"/>
 				<div className="todo-info">
 					<h3>{td.title}</h3>
 					<div>{td.body}</div>

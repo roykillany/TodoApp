@@ -44,7 +44,8 @@ class Api::StepsController < ApplicationController
 		begin
 			@step.update(step_params)
 			@step.save!
-			render json: @step
+			ActiveRecord::Associations::Preloader.new.preload(@step, {todo: :steps})
+			# render json: { step: @step, todo: @step.todo }
 		rescue => e
 			p e.message
 			p e.backtrace
@@ -55,6 +56,6 @@ class Api::StepsController < ApplicationController
 	private
 
 	def step_params
-		params.require(:step).permit(:content, :todo_id)
+		params.require(:step).permit(:content, :todo_id, :done)
 	end
 end

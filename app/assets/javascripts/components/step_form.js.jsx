@@ -12,6 +12,7 @@ StepForm = React.createClass({
 			content = e.currentTarget.value,
 			todo_id = this.props.todoId;
 		if(key === "Enter") {
+			this.setState({ content: "" });
 			ApiUtil.saveStep({todo_id: todo_id, content: content});
 		}
 	},

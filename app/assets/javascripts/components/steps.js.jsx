@@ -5,18 +5,34 @@ Steps = React.createClass({
 
 	componentDidMount: function() {
 		StepStore.addChangeListener(this._onChange);
-		StepStore.addSteps(this.props.steps);
+		if(this.props.steps) {StepStore.addSteps(this.props.steps);};
 	},
 
 	_onChange: function() {
-		console.log("CHANGE", this.state);
 		this.setState({ steps: StepStore.todoSteps(this.props.todoId) });
-		console.log("CHANGE2", this.state);
+	},
+
+	updateCompletion: function(e) {
+		var id = $(e.currentTarget).parent().data("id"),
+			step = this.find(id);
+		step.done = !step.done
+		ApiUtil.updateStep(step);
+	},
+
+	find: function(id) {
+		return this.state.steps.filter(function(step) { return step.id === id; })[0];
 	},
 
 	render: function() {
+		console.log(this.state.steps);
+		var self = this;
 		var steps = this.state.steps ? this.state.steps.map(function(step) {
-			return <li className="step-item">{step.content}</li>
+			var checked = step.done ? "checked" : "",
+				className = "step-item " + checked;
+			return <li key={step.id} data-id={step.id} className={className}>
+				<input type="checkbox" checked={checked} name="done" onChange={self.updateCompletion} value="true"/>
+				{step.content}
+				</li>
 		}) : [];
 
 		return (

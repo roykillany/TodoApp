@@ -30,6 +30,17 @@ ApiUtil = {
 		});
 	},
 
+	updateTodo: function(todo) {
+		$.ajax({
+			url: "/api/todos/" + todo.id,
+			type: "PATCH",
+			data: { todo: todo },
+			success: function(resp) {
+				ApiActions.updateTodo(resp);
+			}
+		});
+	},
+
 	saveStep: function(step) {
 		$.ajax({
 			url: "/api/steps",
@@ -37,6 +48,17 @@ ApiUtil = {
 			data: { step: step },
 			success: function(resp) {
 				ApiActions.addStep(resp);
+			}
+		});
+	},
+
+	updateStep: function(step) {
+		$.ajax({
+			url: "/api/steps/" + step.id,
+			type: "PATCH",
+			data: { step: step },
+			success: function(resp) {
+				ApiActions.updateStep(resp);
 			}
 		});
 	}

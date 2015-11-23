@@ -20,13 +20,10 @@
 	};
 
 	StepStore.addSteps = function(steps) {
-		console.log(steps);
 		_steps = _steps.concat(steps);
 	}
 
 	StepStore.todoSteps = function(todoId) {
-		console.log(_steps);
-		console.log(todoId);
 		return _steps.filter(function(step) { return step.todo_id === todoId; }).slice(0);
 	};
 
@@ -43,6 +40,31 @@
 		_steps = steps;
 	};
 
+	StepStore.updateStep = function(step) {
+		console.log(_steps);
+		var oldStep = this.find(step.id),
+			oldIdx = _steps.indexOf(oldStep);
+		_steps[oldIdx] = step;
+	};
+
+	StepStore.updateSteps = function(todo) {
+		var id = todo.id,
+			done = todo.done;
+
+		_steps.map(function(step) {
+			if(step.todo_id === id) {
+				step.done = done;
+				return step;
+			} else {
+				return step;
+			}
+		});
+	};
+
+	StepStore.find = function(id) {
+		return _steps.filter(function(step) { return step.id === id; })[0];
+	};
+
 	StepStore.dispatcherID = AppDispatcher.register(function(payload) {
 		switch(payload.actionType) {
 			case StepConstants.STEPS_RECEIVED:
@@ -55,6 +77,15 @@
 			case StepConstants.STEP_REMOVED:
 				StepStore.removeStep(payload.step);
 				StepStore.changed();
+				break;
+			case StepConstants.STEP_UPDATED:
+				StepStore.updateStep(payload.step);
+				StepStore.changed();
+				break;
+			case StepConstants.TODO_UPDATED:
+				StepStore.updateSteps(payload.todo);
+				StepStore.changed();
+				break;
 		}
 	});
 
