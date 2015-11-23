@@ -1,0 +1,44 @@
+#content {
+	.todo-app {
+		margin: 0 auto;
+		width: 500px;
+		& > div {
+			h1 {
+				font-weight: bold;
+				font-size: 50px;
+				text-align: center;
+				margin-bottom: 30px;
+			}
+			.todo-form {
+				margin-bottom: 10px;
+			}
+			.todo-container {
+				.todo-item {
+					position: relative;
+					.todo-info {
+						border: 1px solid black;
+						h3 {
+							font-weight: bold;
+						}
+					}
+					.todo-close {
+						position: absolute;
+						right: 0;
+						top: 0;
+						&:hover {
+							cursor: pointer;
+						}
+					}
+					.steps-container {
+						.step-form {
+							border: 1px solid lightgray;
+						}
+						.step-item {
+							border-bottom: 1px solid lightgray;
+						}
+					}
+				}
+			}
+		}
+	}
+}
