@@ -1,7 +1,6 @@
 class Todo < ActiveRecord::Base
+	validates_presence_of :title
 	has_many :steps, dependent: :destroy
-
-	after_update :update_steps
 
 	def update_steps
 		self.steps.update_all({done: self.done})

@@ -58,7 +58,7 @@ ApiUtil = {
 			type: "PATCH",
 			data: { step: step },
 			success: function(resp) {
-				ApiActions.updateStep(resp);
+				ApiActions.updateThroughStep(resp.todo);
 			}
 		});
 	}

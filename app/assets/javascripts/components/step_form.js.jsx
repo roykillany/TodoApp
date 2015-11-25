@@ -20,7 +20,7 @@ StepForm = React.createClass({
 	render: function() {
 		return (
 			<form className="step-form">
-				<input onChange={this.updateContent} onKeyPress={this.saveStep} value={this.state.content} placeholder="CONTENT"/>
+				<input onChange={this.updateContent} onKeyPress={this.saveStep} value={this.state.content} placeholder="Add a step here"/>
 			</form>
 		);
 	}

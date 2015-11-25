@@ -41,13 +41,12 @@
 	};
 
 	StepStore.updateStep = function(step) {
-		console.log(_steps);
 		var oldStep = this.find(step.id),
 			oldIdx = _steps.indexOf(oldStep);
 		_steps[oldIdx] = step;
 	};
 
-	StepStore.updateSteps = function(todo) {
+	StepStore.updateStepsCompletion = function(todo) {
 		var id = todo.id,
 			done = todo.done;
 
@@ -59,6 +58,14 @@
 				return step;
 			}
 		});
+	};
+
+	StepStore.updateSteps = function(steps) {
+		var id = steps[0].todo_id;
+
+		_steps = _steps.filter(function(step) {
+			return step !== id;
+		}).concat(steps);
 	};
 
 	StepStore.find = function(id) {
@@ -82,8 +89,11 @@
 				StepStore.updateStep(payload.step);
 				StepStore.changed();
 				break;
-			case StepConstants.TODO_UPDATED:
-				StepStore.updateSteps(payload.todo);
+			case StepConstants.STEPS_UPDATED:
+				StepStore.updateSteps(payload.steps);
+				break;
+			case StepConstants.TODO_UPDATED_STEPS:
+				StepStore.updateStepsCompletion(payload.todo);
 				StepStore.changed();
 				break;
 		}

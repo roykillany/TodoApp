@@ -26,8 +26,19 @@ ApiActions = {
 			todo: todo
 		});
 		AppDispatcher.dispatch({
-			actionType: StepConstants.TODO_UPDATED,
+			actionType: StepConstants.TODO_UPDATED_STEPS,
 			todo: todo
+		});
+	},
+
+	updateThroughStep: function(todo) {
+		AppDispatcher.dispatch({
+			actionType: TodoConstants.TODO_UPDATED,
+			todo: todo
+		});
+		AppDispatcher.dispatch({
+			actionType: StepConstants.STEPS_UPDATED,
+			steps: todo.steps
 		});
 	},
 
@@ -50,6 +61,10 @@ ApiActions = {
 			actionType: StepConstants.NEW_STEP_RECEIVED,
 			step: step
 		});
+		AppDispatcher.dispatch({
+			actionType: TodoConstants.TODO_UPDATED,
+			todo: step.todo
+		})
 	},
 
 	updateStep: function(step) {

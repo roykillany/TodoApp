@@ -1,1 +1,21 @@
 $base-green: #1aff1a;
+
+.group {
+	content: "";
+  display: block; 
+  clear: both;
+}
+
+.flash-green {
+	background-color: $base-green;
+	transition: background-color 0.5s ease;
+	-webkit-transition: background-color 0.5s ease;
+	-moz-transition: background-color 0.5s ease;
+	-ms-transition: background-color 0.5s ease;
+	-o-transition: background-color 0.5s ease;
+}
+
+.checked {
+	opacity: 0.5;
+	text-decoration: line-through;
+}

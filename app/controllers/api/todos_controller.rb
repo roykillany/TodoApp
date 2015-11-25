@@ -42,8 +42,8 @@ class Api::TodosController < ApplicationController
 
 		begin
 			@todo.update(todo_params)
+			@todo.update_steps
 			@todo.save!
-			render json: @todo
 		rescue => e
 			p e.message
 			p e.backtrace

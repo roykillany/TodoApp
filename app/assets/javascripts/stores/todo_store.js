@@ -19,6 +19,18 @@
 		return _todos.slice(0);
 	};
 
+	TodoStore.unstartedAll = function() {
+		return _todos.filter(function(td){return !td.done && !td.started;});
+	};
+
+	TodoStore.incompAll = function() {
+		return _todos.filter(function(td){return td.started && !td.done;})
+	};
+
+	TodoStore.finishedAll = function() {
+		return _todos.filter(function(td){return td.done;});
+	};
+
 	TodoStore.addNewTodo = function(todo) {
 		_todos.push(todo);
 	};
@@ -57,7 +69,6 @@
 				TodoStore.changed();
 				break;
 			case TodoConstants.TODO_UPDATED:
-				console.log("TODO_UPDATED", payload);
 				TodoStore.updateTodo(payload.todo);
 				TodoStore.changed();
 				break;

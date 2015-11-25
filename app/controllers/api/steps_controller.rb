@@ -17,7 +17,7 @@ class Api::StepsController < ApplicationController
 		@step = Step.new(step_params)
 		begin
 			@step.save!
-			render json: @step
+			ActiveRecord::Associations::Preloader.new.preload(@step, {todo: :steps})
 		rescue => e
 			p e.message
 			p e.backtrace
@@ -45,7 +45,6 @@ class Api::StepsController < ApplicationController
 			@step.update(step_params)
 			@step.save!
 			ActiveRecord::Associations::Preloader.new.preload(@step, {todo: :steps})
-			# render json: { step: @step, todo: @step.todo }
 		rescue => e
 			p e.message
 			p e.backtrace

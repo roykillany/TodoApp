@@ -29,7 +29,7 @@ TodoForm = React.createClass({
 					<label>
 						<input onChange={this.updateBody} value={this.state.body} placeholder="BODY"/>
 					</label>
-					<button type="submit">Submit</button>
+					<button type="submit">Add ToDo</button>
 				</form>
 			</div>
 		);

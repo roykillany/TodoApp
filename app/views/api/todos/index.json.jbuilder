@@ -1,4 +1,3 @@
 json.array!(@todos) do |todo|
-	json.merge! todo.attributes
-	json.steps todo.steps
+	json.partial! "api/todos/todo_partial", todo: todo
 end

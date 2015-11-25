@@ -13,10 +13,18 @@ Steps = React.createClass({
 	},
 
 	updateCompletion: function(e) {
-		var id = $(e.currentTarget).parent().data("id"),
+		var checked = $(e.currentTarget)[0].checked,
+			stepItem = $(e.currentTarget).parent(),
+			id = stepItem.data("id"),
 			step = this.find(id);
 		step.done = !step.done
 		ApiUtil.updateStep(step);
+		if(checked) {
+			stepItem.addClass("flash-green");
+			window.setTimeout(function() {
+				stepItem.removeClass("flash-green");
+			}, 1000);
+		}
 	},
 
 	find: function(id) {
@@ -24,7 +32,6 @@ Steps = React.createClass({
 	},
 
 	render: function() {
-		console.log(this.state.steps);
 		var self = this;
 		var steps = this.state.steps ? this.state.steps.map(function(step) {
 			var checked = step.done ? "checked" : "",
@@ -37,8 +44,8 @@ Steps = React.createClass({
 
 		return (
 			<ul className="steps-container">
-				<StepForm todoId={this.props.todoId}/>
 				{steps}
+				<StepForm todoId={this.props.todoId}/>
 			</ul>
 		);
 	}
