@@ -13,6 +13,9 @@
 				text-align: center;
 				margin-bottom: 30px;
 			}
+			.category-label {
+				padding-top: 15px;
+			}
 			.todo-form {
 				margin-bottom: 10px;
 				form {
@@ -43,7 +46,7 @@
 			.todo-container {
 				.todo-item {
 					position: relative;
-					margin-bottom: 15px;
+					margin-bottom: 5px;
 					padding: 10px;
 					border: 1px solid black;
 					& > input {
@@ -90,6 +93,8 @@
 					}
 					.steps-container {
 						display: none;
+						border-top: 1px solid lightgray;
+						margin-top: 10px;
 						&.active {
 							display: block;
 						}
@@ -106,6 +111,7 @@
 						}
 						.step-item {
 							border-bottom: 1px solid lightgray;
+							padding: 3px;
 							& > input {
 								margin-right: 5px;
 							}

@@ -70,15 +70,15 @@ TodoIndex = React.createClass({
 				<div className="todo-form">
 					<TodoForm />
 				</div>
-				<div>UNSTARTED {unstartedTodos.length}</div>
+				<div className="category-label">UNSTARTED {unstartedTodos.length}</div>
 				<ul className="todo-container unstarted">
 					{unstartedTodos}
 				</ul>
-				<div>IN PROGRESS {incompTodos.length}</div>
+				<div className="category-label">IN PROGRESS {incompTodos.length}</div>
 				<ul className="todo-container progress">
 					{incompTodos}
 				</ul>
-				<div>COMPLETED {finishedTodos.length}</div>
+				<div className="category-label">COMPLETED {finishedTodos.length}</div>
 				<ul className="todo-container done">
 					{finishedTodos}
 				</ul>
