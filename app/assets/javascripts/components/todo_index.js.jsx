@@ -19,7 +19,6 @@ TodoIndex = React.createClass({
 	deleteTodo: function(e) {
 		var id = $(e.currentTarget).data("id"),
 			todo = this.find(id);
-		console.log("deleting", id, todo);
 		ApiUtil.removeTodo(todo);
 	},
 
