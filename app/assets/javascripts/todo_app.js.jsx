@@ -3,6 +3,7 @@
 	var Router = ReactRouter.Router;
 
 	$(document).ready(function() {
+		alert("hi");
 		React.render(
 			<Router>
 				<Route path="/" component={App}>
