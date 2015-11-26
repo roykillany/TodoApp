@@ -27,6 +27,13 @@ Steps = React.createClass({
 		}
 	},
 
+	deleteStep: function(e) {
+		var id = $(e.currentTarget).data("id"),
+			step = this.find(id);
+
+		ApiUtil.deleteStep(step);
+	},
+
 	find: function(id) {
 		return this.state.steps.filter(function(step) { return step.id === id; })[0];
 	},
@@ -35,10 +42,12 @@ Steps = React.createClass({
 		var self = this;
 		var steps = this.state.steps ? this.state.steps.map(function(step) {
 			var checked = step.done ? "checked" : "",
-				className = "step-item " + checked;
+				className = "step-item " + checked,
+				stepKey = "step-" + step.id;
 			return <li key={step.id} data-id={step.id} className={className}>
 				<input type="checkbox" checked={checked} name="done" onChange={self.updateCompletion} value="true"/>
 				{step.content}
+				<div className="step-close" data-id={step.id} onClick={self.deleteStep}>✘</div>
 				</li>
 		}) : [];
 

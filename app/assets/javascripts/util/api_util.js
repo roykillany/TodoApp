@@ -61,5 +61,16 @@ ApiUtil = {
 				ApiActions.updateThroughStep(resp.todo);
 			}
 		});
+	},
+
+	deleteStep: function(step) {
+		$.ajax({
+			url: "/api/steps/" + step.id,
+			type: "DELETE",
+			data: { step: step },
+			success: function(resp) {
+				ApiActions.deleteThroughStep(resp, step.id);
+			}
+		});
 	}
 }

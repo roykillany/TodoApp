@@ -9,4 +9,12 @@ class Todo < ActiveRecord::Base
 	def is_completed?
 		self.steps.all? { |step| step.done }
 	end
+
+	def update_completion
+		if self.is_completed?
+			self.update({done: true})
+		else
+			self.update({done: false})
+		end
+	end
 end

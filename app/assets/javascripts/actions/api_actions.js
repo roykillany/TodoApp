@@ -42,6 +42,17 @@ ApiActions = {
 		});
 	},
 
+	deleteThroughStep: function(todo, stepId) {
+		AppDispatcher.dispatch({
+			actionType: TodoConstants.TODO_UPDATED,
+			todo: todo
+		});
+		AppDispatcher.dispatch({
+			actionType: StepConstants.STEP_REMOVED,
+			stepId: stepId
+		});
+	},
+
 	checkTodo: function(todo) {
 		AppDispatcher.dispatch({
 			actionType: TodoConstants.TODO_UPDATED,

@@ -17,9 +17,9 @@ TodoIndex = React.createClass({
 	},
 
 	deleteTodo: function(e) {
-		var idx = e.currentTarget.id,
-			todo = this.state.todos[idx];
-			
+		var id = $(e.currentTarget).data("id"),
+			todo = this.find(id);
+		console.log("deleting", id, todo);
 		ApiUtil.removeTodo(todo);
 	},
 
@@ -49,14 +49,15 @@ TodoIndex = React.createClass({
 		var self = this,
 			mapCB = function(td, idx) {
 				var checked = td.done ? "checked" : "",
-					className = "todo-item " + checked;
+					className = "todo-item " + checked,
+					todoKey = "todo-" + td.id;
 				return <li key={td.id} data-id={td.id} className={className}>
 					<input type="checkbox" checked={checked} name="done" onChange={self.updateCompletion} value="true"/>
 					<div className="todo-info" onClick={self.showSteps}>
 						<h3>{td.title} <div>({td.completion})</div></h3>
 						<div>{td.body}</div>
 					</div>
-					<div className="todo-close" id={idx} onClick={self.deleteTodo}>✘</div>
+					<div className="todo-close" data-id={td.id} onClick={self.deleteTodo}>✘</div>
 					<Steps steps={td.steps} todoId={td.id}/>
 				</li>;
 			},

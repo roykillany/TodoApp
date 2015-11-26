@@ -26,11 +26,13 @@ class Api::StepsController < ApplicationController
 	end
 
 	def destroy
-		@step = Step.find(params[:id])
+		@step = Step.includes(todo: :steps).find(params[:id])
+		todo_id = @step.todo_id
 
 		begin
 			@step.destroy!
-			render json: { ok: 1 }
+			@todo = Todo.includes(:steps).find(todo_id)
+			@todo.update_completion
 		rescue => e
 			p e.message
 			p e.backtrace

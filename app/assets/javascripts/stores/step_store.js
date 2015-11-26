@@ -31,8 +31,8 @@
 		_steps.push(step);
 	};
 
-	StepStore.removeStep = function(step) {
-		var idx = _steps.indexOf(step);
+	StepStore.removeStep = function(stepId) {
+		var idx = _steps.indexOf(StepStore.find(stepId));
 		if(idx > -1) {_steps.splice(idx, 1)};
 	};
 
@@ -82,7 +82,7 @@
 				StepStore.changed();
 				break;
 			case StepConstants.STEP_REMOVED:
-				StepStore.removeStep(payload.step);
+				StepStore.removeStep(payload.stepId);
 				StepStore.changed();
 				break;
 			case StepConstants.STEP_UPDATED:
