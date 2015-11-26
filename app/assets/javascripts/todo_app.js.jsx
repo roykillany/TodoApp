@@ -4,6 +4,7 @@
 
 	$(document).ready(function() {
 		alert("hi");
+		console.log("hi", App, TodoIndex);
 		React.render(
 			<Router>
 				<Route path="/" component={App}>
